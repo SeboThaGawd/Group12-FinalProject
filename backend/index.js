@@ -1,4 +1,4 @@
-//SERVER STUFF
+//SERVER STUFF: Setting port and importin express
 const express = require('express');
 const app = express();
 
@@ -11,7 +11,7 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(express.urlencoded());
 
-//DATABASE STUFF
+//DATABASE STUFF: Setting up mongoDB. May need to change, I don't think the data persists after server turns off
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
@@ -68,8 +68,34 @@ const USER = mongoose.model('USER', userSchema);
 //PUT
     //take info from "new entry" form or something and USER.create()
     //req.env.body or something
-//GET
 
+//GET
+app.get('/', (req, res) => {
+    USER.findOne({ name: req.name }).exec((error, images) => {
+        if (error) {
+          console.log(error)
+          res.send(500)
+        } else {
+          res.json({favorite: images[0]})
+        }
+    })
+  })
+  
 //POST
+app.post('/', (req, res) => {
+    const cat = new USER({
+        name: req.body.name,
+        password: req.body.password,
+        cap: req.body.cap,
+        categories: req.body.categories
+    })
+    apod.save((error, document) => {
+    if (error) {
+        res.json({status: "issue adding"});
+    } else {
+        res.json({content: req.body});
+    }
+    })
+  })
 
 //DELETE
