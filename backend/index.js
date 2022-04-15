@@ -14,8 +14,10 @@ app.use(express.urlencoded());
 //DATABASE STUFF: Setting up mongoDB. May need to change, I don't think the data persists after server turns off
 const mongoose = require('mongoose');
 
+const url = "mongodb+srv://FullStackDecal12:flowersandrainbows@cluster0.cwm0b.mongodb.net/test"; //Mongo DB Atlas
+mongoose.connect(url);
+
 const db = mongoose.connection;
-const url = "mongodb://127.0.0.1:27017/"; // UPDATE LATER
 
 db.once('open', _ => {
   console.log('Database connected')
@@ -47,6 +49,32 @@ const userSchema = mongoose.Schema({
 });
 
 const USER = mongoose.model('USER', userSchema);
+
+//update
+app.patch('/put', async (req, res) => {
+    try {
+        const id = req.body.id;
+        const newBody = req.body;
+        const updatedObject = await USER.findByIdAndUpdate(
+            id, newBody, {new : true}
+        );
+        res.send(updatedObject);
+    } catch (err){
+        res.status(400).json({message : err.message});
+    }
+});
+
+//delete
+app.delete('/delete', async(req, res) => {
+    try {
+        const id = req.body.id;
+        const deletedName = USER.findById(id).name;
+        await USER.findByIdAndDelete(id);
+        res.send("Deleted ${deletedName}");
+    } catch(err) {
+        res.status(400).json({message : err.message});
+    }
+});
 
 //DB SCHEMA BREAKDOWN
 
