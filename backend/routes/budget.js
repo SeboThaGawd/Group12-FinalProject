@@ -5,7 +5,7 @@ const USER = require('../models/UserSchema');
 const { modelName } = require('../models/UserSchema');
 
 //update
-router.patch('/put', auth, async (req, res) => {
+router.put('/put', auth, async (req, res) => {
     try {
         const id = req.body.id;
         const newBody = req.body;
