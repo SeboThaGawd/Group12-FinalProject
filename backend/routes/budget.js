@@ -52,31 +52,50 @@ router.delete('/delete', auth, async(req, res) => {
     //req.env.body or something
 
 //GET
-router.get('/retrieve', auth, (req, res) => {
-    USER.findOne({ name: req.name }).exec((error, images) => {
-        if (error) {
-          console.log(error)
-          res.send(500)
-        } else {
-          res.json({favorite: images[0]})
-        }
-    })
+router.get('/retrieve', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user);
+    } catch(e) {
+        res.send({message: "Error in Fetching User"});
+    }
   })
   
 //POST
-router.post('/add', auth, (req, res) => {
-    const cat = new USER({
+/**
+ * name: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    cap: {
+        type: Number,
+        required: true
+    },
+    categories: {
+        type: [Object],
+        required: true
+    }
+ */
+router.post('/add', auth, async (req, res) => {
+    const category = new USER({
         name: req.body.name,
         password: req.body.password,
         cap: req.body.cap,
         categories: req.body.categories
     })
-    apod.save((error, document) => {
-    if (error) {
-        res.json({status: "issue adding"});
-    } else {
-        res.json({content: req.body});
-    }
+    category.save((error, document) => {
+        if (error) {
+            res.json({status: "issue adding"});
+        } else {
+            res.json({
+                status: "success",
+                content: req.body
+              });
+        }
     })
   })
 
