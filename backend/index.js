@@ -1,26 +1,27 @@
-//SERVER STUFF: Setting port and importin express
 const express = require('express');
-const bodyParser = require('body-parser')
-const InitiateMongoServer = require("./config/db")
-const user = require('./routes/user')
-const budget = require('./routes/budget')
+const bodyParser = require('body-parser');
+const InitiateMongoServer = require("./config/db");
+const user = require('./routes/user');
+const budget = require('./routes/budget');
 
-InitiateMongoServer()
+//Initiate Mongo Server
+InitiateMongoServer();
 
 const app = express();
 
-const port = process.env.PORT || 4000;
+// PORT
+const PORT = process.env.PORT || 4000;
 
-app.use(express.json());
-app.use(express.urlencoded());
+// Middleware
+app.use(bodyParser.json());
 
 app.use('/user', user)
 app.use('/budget', budget)
 
 app.get('/', (req, res) => {
-    res.json({ message: 'API Online' })
-})
+  res.json({ message: 'API Working' });
+});
 
-app.listen(port, (req, res) => {
-    console.log(`Server Started at PORT ${port}`)
-})
+app.listen(PORT, (req, res) => {
+  console.log(`Server Started at PORT ${PORT}`);
+});

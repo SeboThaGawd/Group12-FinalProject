@@ -1,4 +1,4 @@
-const express = requrie('express')
+const express = require('express')
 const router = express.Router()
 const auth = require('./../middleware/auth')
 const USER = require('../models/UserSchema');
@@ -83,3 +83,4 @@ router.post('/add', auth, (req, res) => {
 //DELETE
 
 modelName.exports = router
+module.exports = router;
