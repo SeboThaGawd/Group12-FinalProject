@@ -36,7 +36,7 @@ function Mainpage() {
             <Stack flexdir="column" position="relative">
                 <h1 >Make Cents</h1>
                 <h2>Don’t budge your lifestyle, budget</h2>
-                <LoginModal/>
+                <Button>hjhj</Button>
             </Stack>  
         </Flex>
       </Box>
