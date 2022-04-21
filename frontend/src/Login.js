@@ -23,7 +23,14 @@ function LogIn() {
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
 
-
+  function getUser() {
+    if (user != "" && pass != "") {
+      axios.POST(url, {"name":user, "password": password})
+      .then(response => {
+      console.log(response)
+      }).catch(error => console.log("There was an error"))
+    }
+  }
 
     return (
       <ChakraProvider theme={theme}>
@@ -39,3 +46,4 @@ function LogIn() {
   }
   
   export default LogIn;
+
