@@ -37,6 +37,8 @@ function SignUp() {
       setBudget(val.target.value) 
   }
 
+  const toke = null
+
     return (
         <ChakraProvider theme={theme}>
           <h1>FGHJK</h1>
@@ -53,11 +55,11 @@ function SignUp() {
                     <h1></h1>
                     <input type="text" onChange={password}></input>
                     <button onClick={() => {
-                        const url = "http://localhost:4000/signup";
+                        const url = "http://localhost:4000/user/signup"
                         if (user != "" && pass != "") {
                           axios.post(url, {"name":user, "password": pass, "budget": budget})
                           .then(response => {
-                          console.log(response)
+                          toke = response.token
                           }).catch(error => console.log("There was an error"))
                         }
                     }}>LOGIN</button>

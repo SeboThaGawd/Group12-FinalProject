@@ -25,7 +25,7 @@ function App() {
       <Box background="#218F80" textAlign="center" fontSize="xl">
       <Router>
         <Routes>
-          <Route path="/" element={<Mainpage />}></Route>
+          <Route path="" element={<Mainpage />}></Route>
           <Route path="/login" element={<Loginpage/>}></Route>
           <Route path="/login/newuser" element={<SignUp />}></Route>
         </Routes>

@@ -46,7 +46,7 @@ function Loginpage() {
                     <h1></h1>
                     <input type="text" onChange={password}></input>
                     <button onClick={() => {
-                        const url = "http://localhost:3001/login";
+                        const url = "http://localhost:4000/login";
                         if (user != "" && pass != "") {
                           axios.post(url, {"name":user, "password": pass})
                           .then(response => {
