@@ -25,6 +25,7 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Navbar from './Navbar';
 import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
+import SignUp from './SignUp';
 
 
 function Mainpage() {
@@ -36,7 +37,7 @@ function Mainpage() {
             <Stack flexdir="column" position="relative">
                 <h1 >Make Cents</h1>
                 <h2>Don’t budge your lifestyle, budget</h2>
-                <Button>hjhj</Button>
+                <SignUp/>
             </Stack>  
         </Flex>
       </Box>

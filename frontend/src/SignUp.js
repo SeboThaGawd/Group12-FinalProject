@@ -1,29 +1,47 @@
-import { React, useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
+  Menu,
   ChakraProvider,
-  Box,
-  Text,
+  theme,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  MenuCommand,
+  MenuDivider,
+  Button,
+  Flex,
   Link,
-    Flex,
-  VStack,
   Code,
   Grid,
   Stack,
-  theme,
-  Button,
+  Text,
+  chakra,
+  Box,
+  Switch,
+  VStack,
+  IconButton,
+  useDisclosure,
+  HStack
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-import Navbar from './Navbar';
-import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
-import Mainpage from './Mainpage';
 import axios from 'axios';
+import { animate } from 'framer-motion';
+
 
 function SignUp() {
 
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
-  const [budget, setBudget] = useState(0)
 
   function username(val) {
     setUser(val.target.value)
@@ -33,44 +51,70 @@ function SignUp() {
     setPass(val.target.value)
   }
 
-  function budge(val) {
-      setBudget(val.target.value) 
-  }
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toke = null
 
-    return (
-        <ChakraProvider theme={theme}>
-          <h1>FGHJK</h1>
-          <Box color ="white" textAlign="center" fontSize="xl">
-            <Flex flexShrink={0} flexdir="row">
-                <Stack flexdir="column" position="relative">
-                    <h1 >Sign Up and Save!!</h1>
-                    <h1>{user}</h1>
-                    <h2>{pass}</h2>
-                    <Box background = "#218F80" textAlign="center" fontSize="xl">
-                    <input type="text" onChange={username}></input>
-                    <h1></h1>
-                    <button>signup</button>
-                    <h1></h1>
-                    <input type="text" onChange={password}></input>
-                    <button onClick={() => {
-                        const url = "http://localhost:4000/user/signup"
-                        if (user != "" && pass != "") {
-                          axios.post(url, {"name":user, "password": pass, "budget": budget})
-                          .then(response => {
-                          toke = response.token
-                          }).catch(error => console.log("There was an error"))
-                        }
-                    }}>LOGIN</button>
-                    <input type="text" onChange={budge}></input>
-                    </Box>   
-                </Stack>  
-            </Flex>
-          </Box>
-        </ChakraProvider>
-      );
-    }
+  function close(to) {
+    toke = to
+    onClose()
+  }
+
+  function errr() {
+    console.log("There was an error")
+   // onClose()
+  }
+
+
+
+  return (
+
+    <ChakraProvider theme={theme}>
+   
+         <Button onClick={onOpen}>Get Started!</Button>
+   
+         <Modal isOpen={isOpen} onClose={onClose}>
+           <ModalOverlay />
+           <ModalContent>
+             <ModalHeader>Sign up and Save!</ModalHeader>
+             <ModalCloseButton />
+             <ModalBody>
+              <Stack>
+                <Flex justifyContent="space-between">
+                  <h2>Username</h2>
+                  <input border="solid" background="black" type="text" onChange={username}></input>
+              </Flex>
+              <Flex>
+                  <h2>Password</h2>
+                  <input type="text" onChange={password}></input>
+              </Flex>
+              </Stack>  
+             </ModalBody>
+   
+             <ModalFooter>
+               <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
+                 Cancel
+               </Button>
+               <Button variant='blue' onClick={
+                 () => {
+                      const url = "http://localhost:4000/user/signup"
+                      if (user != "" && pass != "") {
+                        axios.post(url, {"name":user, "password": pass})
+                        .then(response => {
+                        close(response.token)
+                        }).catch(error => {errr()})
+                      }
+                  }
+               }>Submit</Button>  
+             </ModalFooter>
+           </ModalContent>
+         </Modal>
+   
+         </ChakraProvider>
+   
+     );
+   }
 
 export default SignUp;
+
 

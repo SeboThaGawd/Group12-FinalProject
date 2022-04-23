@@ -22,14 +22,12 @@ function Navbar() {
       <ChakraProvider theme={theme}>
           <Flex flexDir="row" alignContent="right" background="#E8E0D9" alignItems="self-end" color="#56787">
               <Router>
-                <NavLink to='/' width={100}
-                    >Home</NavLink>
+              <Button background = "none" _hover ={{color : "#DACCC0"}}><NavLink to='/' width={100}
+                    >Home</NavLink></Button>
                 <Button background = "none" _hover ={{color : "#DACCC0"}}><NavLink to='/profile' width={100}
                     onClick ={() => 10}
                     >Profile</NavLink></Button>
-                <Button background = "none" _hover ={{color : "#DACCC0"}}><NavLink to='/login' width={100}
-                    onClick ={() => 10}
-                    >Login</NavLink></Button>
+                <Button background = "none" _hover ={{color : "#DACCC0"}}><NavLink to='/login'>Login</NavLink></Button>
               </Router>
           </Flex>
      </ChakraProvider>

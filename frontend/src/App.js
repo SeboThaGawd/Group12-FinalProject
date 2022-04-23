@@ -16,6 +16,7 @@ import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom'
 import Mainpage from './Mainpage';
 import Loginpage from './LoginPage';
 import SignUp from './SignUp';
+import Profile from './Profile';
 
 function App() {
 
@@ -26,12 +27,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="" element={<Mainpage />}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
           <Route path="/login" element={<Loginpage/>}></Route>
           <Route path="/login/newuser" element={<SignUp />}></Route>
         </Routes>
       </Router>
         <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
         </Grid>
       </Box>
     </ChakraProvider>
