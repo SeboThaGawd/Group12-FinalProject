@@ -13,9 +13,9 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  Input,
   ModalHeader,
   ModalFooter,
+  Input,
   ModalBody,
   ModalCloseButton,
   MenuCommand,
@@ -37,10 +37,9 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { animate } from 'framer-motion';
-import SetBudget from './SetBudget';
 
 
-function SignUp() {
+function Login() {
 
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
@@ -62,27 +61,33 @@ function SignUp() {
     onClose()
   }
 
+  function errr() {
+    console.log("There was an error")
+   // onClose()
+  }
+
+
 
   return (
 
     <ChakraProvider theme={theme}>
    
-         <Button  background="#E8E0D9" borderRadius="20" color="#9F7E69" fontSize="25px" height="10vh" onClick={onOpen}>SignUp!</Button>
+         <Button background="#CDE0D0" borderRadius="20" color="#9F7E69" fontSize="25px" height="10vh" onClick={onOpen}>Welcome Back!</Button>
    
          <Modal isOpen={isOpen} onClose={onClose}>
            <ModalOverlay />
            <ModalContent background='#ffffff'>
-             <ModalHeader color='black'>Welcome!</ModalHeader>
+             <ModalHeader>Welcome Back!</ModalHeader>
              <ModalCloseButton />
              <ModalBody>
               <Stack>
                 <Flex justifyContent="space-between">
-                  <Text color='black'>Username</Text>
-                  <Input h='4vh' ml={6} borderColor='black'type="text" onChange={username}></Input>
+                  <Text>Username</Text>
+                  <Input h='4vh' ml={6} border="solid" type="text" onChange={username}></Input>
               </Flex>
               <Flex>
-                  <Text color='black' mt={1}>Password</Text>
-                  <Input h='4vh'  borderColor='black' ml={7} type="text" onChange={password}></Input>
+                  <Text mt={1}>Password</Text>
+                  <Input h='4vh' ml={7} type="text" onChange={password}></Input>
               </Flex>
               </Stack>  
              </ModalBody>
@@ -91,8 +96,17 @@ function SignUp() {
                <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
                  Cancel
                </Button>
-               <SetBudget>
-               Next</SetBudget>  
+               <Button background='#CDE0D0' onClick={
+                 () => {
+                      const url = "http://localhost:4000/user/login"
+                      if (user != "" && pass != "") {
+                        axios.post(url, {"name":user, "password": pass})
+                        .then(response => {
+                        close(response.token)
+                        }).catch(error => {errr()})
+                      }
+                  }
+               }>Login!</Button>  
              </ModalFooter>
            </ModalContent>
          </Modal>
@@ -102,6 +116,6 @@ function SignUp() {
      );
    }
 
-export default SignUp;
+export default Login;
 
 
