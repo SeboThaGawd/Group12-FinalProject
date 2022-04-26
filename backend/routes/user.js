@@ -48,7 +48,7 @@ router.post(
 
     try {
       let user = await User.findOne({
-        username,
+        username: username,
       });
       if (user) {
         return res.status(400).json({
@@ -117,7 +117,7 @@ router.post(
         });
         if (!user)
           return res.status(400).json({
-            message: "User Not Exist",
+            message: "User Does Not Exist",
           });
   
         const isMatch = await bcrypt.compare(password, user.password);
