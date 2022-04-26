@@ -43,14 +43,14 @@ function Dashboard() {
 
     async function componentDidMount() {
 
-        axios.get("http://localhost:4000/user")
+        axios.get("http://localhost:4000/budget/get")
         .then(res => {
             console.log(res);
             this.setState({purchases: res.body.data})
         }).catch(error => {console.log(error)});
 
         //Different endpoints
-        axios.get("http://localhost:4000/user")
+        axios.get("http://localhost:4000/user/mes")
         .then(res => {
             console.log(res);
             this.setState({budgets: res.body.data})
@@ -86,16 +86,16 @@ function Dashboard() {
                 if (this.purchases[i].category == "other") {
                     otherBal += this.purchases[i].price
                 }
-            }
+            } 
         }
     }
 
   return (
     <ChakraProvider theme={theme}>
-        <Stack>
+        <Stack background="white">
         <Purchase/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>
-        <Budget category="Food" total={54} cap={50} under={false}/>
+        <Budget category="Food" total={54} cap={20} under={false}/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>
         <Budget category="Food" total={54} cap={50} under={false}/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>

@@ -102,7 +102,7 @@ function Login() {
                       if (user != "" && pass != "") {
                         axios.post(url, {"name":user, "password": pass})
                         .then(response => {
-                        close(response.token)
+                          localStorage.setItem('user', JSON.stringify(response.token))
                         }).catch(error => {errr()})
                       }
                   }
