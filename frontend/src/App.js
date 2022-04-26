@@ -15,12 +15,8 @@ import {
 } from '@chakra-ui/react';
 import Navbar from './Navbar';
 import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
-import Mainpage from './Mainpage';
-import Loginpage from './LoginPage';
 import SignUp from './SignUp';
 import Login from './Login';
-import Profile from './Profile';
-import Purchase from './Purchase';
 import Dashboard from './Dashboard';
 
 function App() {
@@ -30,7 +26,6 @@ function App() {
     <ChakraProvider theme={theme}>
       <Box background="#218F80" fontSize="xl">
         <Grid minH="100vh" p={3}>
-        <img src="budget.jpg" alt="our bugeting app" position="relative" margin-right="0px" margin-top="0px"></img>
           <Flex width="45vw">
           <Stack height="60vh" mt={75}>
           <Spacer/>

@@ -118,7 +118,7 @@ function SignUp() {
   }
 
   function sumVal() {
-      setSum(parseInt(rent) + parseInt(groc) + parseInt(food) +  parseInt(clothes) + parseInt(rec) + parseInt(other))
+      setSum(parseInt(groc) + parseInt(food) +  parseInt(clothes) + parseInt(rec) + parseInt(other))
   }
 
 
@@ -182,10 +182,12 @@ function SignUp() {
                <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
                  Cancel
                </Button>
-               <Button onClick ={res => {
-                 axios.post("http://localhost:4000/user/signup", {"Username": username, "Password": pass, 
-                 "budgetAmounts": [groc, food, clothes, rec, other]})
-                 .then(res => console.log(res))
+               <Button onClick = {res => {
+                 axios.post("http://localhost:4000/user/signup", {"username": user, "password": pass, "budget":[groc, food, clothes, rec, other] })
+                 .then(res => {console.log(res);
+                              localStorage.setItem('token', JSON.stringify(res.data.token));
+                              console.log(localStorage)
+                 })
                  .catch(error => console.log(error))
                }
                }

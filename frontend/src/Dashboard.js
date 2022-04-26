@@ -43,19 +43,20 @@ function Dashboard() {
 
     async function componentDidMount() {
 
-        axios.get("http://localhost:4000/budget/get")
+        axios.get("http://localhost:4000/budget/get", )
         .then(res => {
             console.log(res);
-            this.setState({purchases: res.body.data})
+            this.setState({purchases: res.body.data.Spent,
+                            budgets: res.body.data.Budget})
         }).catch(error => {console.log(error)});
 
         //Different endpoints
-        axios.get("http://localhost:4000/user/mes")
-        .then(res => {
-            console.log(res);
-            this.setState({budgets: res.body.data})
-        }).catch(error => {console.log(error)});
-        filter()
+        // axios.get("http://localhost:4000/user/mes")
+        // .then(res => {
+        //     console.log(res);
+        //     this.setState({budgets: res.body.data})
+        // }).catch(error => {console.log(error)});
+        // filter()
     }
 
     function dateDiffInDays(one, two) {
