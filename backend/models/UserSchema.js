@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
         required: true
     },
     //array of category objects
-    categories: [{              //"budget" field removed
+    categories: [{              //"fixed" field removed
         "catID": String,
         "spent": Number,
         "budget": Number
