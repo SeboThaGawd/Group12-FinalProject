@@ -6,6 +6,7 @@ const router = express.Router();
 const auth = require("./../middleware/auth");
 
 const User = require("../models/UserSchema");
+const DEFAULT_CATEGORIES = ["grocery", "food", "clothes", "rec", "other"];
 
 /**
  * @method - POST
@@ -29,20 +30,36 @@ router.post(
       });
     }
 
-    const { username, password } = req.body;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    //construct starting user budgets
+    const budgetAmounts = req.body.budgetAmounts;
+    const userCatArray = [];
+    for (let i = 0; i < 6; i++) {
+      userCatArray.push(
+        {
+          "catID": DEFAULT_CATEGORIES[i],
+          "spent": 0,
+          "budget": budgetAmounts[i];
+        }
+      );
+    }
+
     try {
       let user = await User.findOne({
         username,
       });
       if (user) {
         return res.status(400).json({
-          msg: "User Already Exists",
+          msg: "Username Already Exists",
         });
       }
 
       user = new User({
         username,
         password,
+        userCatArray
       });
 
       const salt = await bcrypt.genSalt(10);

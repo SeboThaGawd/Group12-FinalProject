@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(bodyParser.json());
 
-app.use('/user', user)
-app.use('/budget', budget)
+app.use('/user', user);
+app.use('/budget', budget);
 
 app.get('/', (req, res) => {
   res.json({ message: 'API Working' });
