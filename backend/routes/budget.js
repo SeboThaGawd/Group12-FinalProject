@@ -4,25 +4,34 @@ const auth = require('./../middleware/auth')
 const USER = require('../models/UserSchema');
 const { modelName } = require('../models/UserSchema');
 
-//user selects category name form dropdown menu and inputs how much they spent on it
-//so we retrieve the current spent amount for the selected category and add "amount" to it
-
-//WE SHOULD PROBABLY CHANGE CATID TO JUST THE NAME OF THE CATEGORY
-router.post('/add', auth, async(req, res) => {
+router.put('/add', auth, async (req, res) => {
     try {
+        const user = await USER.findById(req.user.id);
         const amount = req.body.amount;
-        const catId = req.body.catId;
-        const id = req.body.id;
-        const user = await USER.findById(id);
+        const inputCategory = req.body.category;
         const catArray = user.categories;
-        const cat = catArray[catId];
-        cat.spent = cat.spent + amount;
+        for (let i = 0; i < catArray.length; i++) {
+            if (catArray[i].name == inputCategory) {
+                catArray[i].spent =  catArray[i].spent + amount;
+            }
+        }
         await user.save();
         res.json(user);
     } catch(err) {
         res.json({ message: "Error in updating spent amount" });
     }
 });
+
+router.get('/get', auth, async (req, res) => {
+    try {
+        const user = await USER.findById(req.user.id);
+        res.json(user.categories);
+    } catch(err) {
+        res.json({ message: "Error in retrieving user data" });
+    }
+});
+
+
 
 
 // //update
