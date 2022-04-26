@@ -36,12 +36,12 @@ router.post(
     //construct starting user budgets
     const budgetAmounts = req.body.budgetAmounts;
     const userCatArray = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       userCatArray.push(
         {
           "catID": DEFAULT_CATEGORIES[i],
           "spent": 0,
-          "budget": budgetAmounts[i];
+          "budget": budgetAmounts[i]
         }
       );
     }
@@ -56,10 +56,11 @@ router.post(
         });
       }
 
+
       user = new User({
-        username,
-        password,
-        userCatArray
+        username: username,
+        password: password,
+        categories: userCatArray
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -70,8 +71,8 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-        },
-      };
+        }
+      }
 
       jwt.sign(
         payload,
@@ -99,14 +100,14 @@ router.post(
       check("username", "Please enter a valid username").not().isEmpty(),
       check("password", "Please enter a valid password").isLength({
         min: 6,
-      }),
+      })
     ],
     async (req, res) => {
       const errors = validationResult(req);
   
       if (!errors.isEmpty()) {
         return res.status(400).json({
-          errors: errors.array(),
+          errors: errors.array()
         });
       }
   
@@ -115,22 +116,24 @@ router.post(
         let user = await User.findOne({
           username: username,
         });
-        if (!user)
+        if (!user) {
           return res.status(400).json({
             message: "User Does Not Exist",
           });
+        }
   
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch)
+        if (!isMatch) {
           return res.status(400).json({
             message: "Incorrect Password !",
           });
+        }
   
         const payload = {
           user: {
             id: user.id,
-          },
-        };
+          }
+        }
   
         jwt.sign(
           payload,
