@@ -30,8 +30,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <Box background="#218F80" fontSize="xl">
         <Grid minH="100vh" p={3}>
-        <img src="budget.jpg" alt="our bugeting app" position="relative" margin-right="0px" margin-top="0px"></img>
-          <Flex width="45vw">
+          <Flex width="85vw">
           <Stack height="60vh" mt={75}>
           <Spacer/>
           <Text pl={20} color = "white" fontWeight='500' fontSize="70px" fontFamily='Hind' fontStyle='normal'>MAKE CENTS</Text>
@@ -45,6 +44,8 @@ function App() {
           <Login>Login</Login>
           <SignUp >SignUp</SignUp>
           </Stack>
+          <Spacer></Spacer>
+          <img src="budget.png" alt="our bugeting app" position="absolute" width="50%"></img>
           </Flex>
         </Grid>
       </Box>
