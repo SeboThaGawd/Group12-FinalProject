@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -9,14 +9,18 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    cap: {
-        type: Number,
-        required: true
-    },
-    categories: {
-        type: [Object],
-        required: true
+    //array of category objects
+    categories: [{              //"budget" field removed
+        "catID": Number,
+        "spent": Number,
+        "budget": Number
+    }],
+    date : {
+        type: Date,
+        default: Date.now()
     }
-});
+}); 
+
+
 
 module.exports = mongoose.model('userScehma', userSchema)
