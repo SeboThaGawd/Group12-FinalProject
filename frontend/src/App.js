@@ -48,7 +48,6 @@ function App() {
         </Grid>
       </Box>
       <Dashboard/>
-      <Purchase/>
     </ChakraProvider>
 
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -32,23 +32,34 @@ import {
     MenuOptionGroup,
     MenuDivider,
   } from '@chakra-ui/react'
+import axios from 'axios';
 
 function Purchase() {
 
+  const [option, setOption] = useState("");
+  const [amt, setAmt] = useState(0)
+  const date = new Date();
+
   return (
     <ChakraProvider theme={theme}>
-      <Box background="#218F80" fontSize="xl" h='20vh'>
+      <Box background="#E8E0D9" borderfontSize="xl" borderRadius="20" h='10vh'>
           <Flex pt={4}>
-            <Select background='#E8E0D9' placeholder='Pick Category' width='30vw'>
+            <Select ml={10} color="black" onChange={(res) => setOption(res.target.value)} background='#FFFFF5' placeholder='Pick Category' width='30vw'>
                 <option value='option1'>Grocery</option>
                 <option value='option2'>Food/Bev</option>
-                <option value='option3'>Clothing</option>
+                <option value='option3'>Online Purchases</option>
                 <option value='option3'>Recreation</option>
                 <option value='option3'>Transportation</option>
                 <option value='option3'>Other</option>
             </Select>
-            <Text ml={10} mr={10}>Please input Amount</Text>
-            <Input type="text" width="30vw"></Input>
+            <Text ml={10} mr={10} onChange = {(res) => setAmt(res.target.value)}>Please input Amount</Text>
+            <Input type="text" color="black" background = '#FFFFF5' width="30vw"></Input>
+            <Button ml={10} color="black" background="#D7FCD4"lp={4} onClick={() => {
+              if (option != "" && amt > 0) {
+                axios.post("http://localhost:4000/budget/add", {"Category": option, "Amount": amt, "Date": date})
+                .then(res => (console.log(res)))
+                .catch(error => (console.log(error)))
+            }}}>Add!</Button>
         </Flex>
       </Box>
     </ChakraProvider>

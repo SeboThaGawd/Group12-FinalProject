@@ -39,6 +39,8 @@ function Dashboard() {
         budgets: []
     }
 
+    componentDidMount()
+
     async function componentDidMount() {
 
         axios.get("http://localhost:4000/user")
@@ -51,7 +53,7 @@ function Dashboard() {
         axios.get("http://localhost:4000/user")
         .then(res => {
             console.log(res);
-            this.setState({budgets: res.data})
+            this.setState({budgets: res.body.data})
         }).catch(error => {console.log(error)});
         filter()
     }
@@ -91,6 +93,11 @@ function Dashboard() {
   return (
     <ChakraProvider theme={theme}>
         <Stack>
+        <Purchase/>
+        <Budget category="Grocery" total={50} cap={60} under={true}/>
+        <Budget category="Food" total={54} cap={50} under={false}/>
+        <Budget category="Grocery" total={50} cap={60} under={true}/>
+        <Budget category="Food" total={54} cap={50} under={false}/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>
         <Budget category="Food" total={54} cap={50} under={false}/>
 

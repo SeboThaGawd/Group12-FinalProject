@@ -78,11 +78,11 @@ function SignUp() {
               <Stack>
                 <Flex justifyContent="space-between">
                   <Text color='black'>Username</Text>
-                  <Input h='4vh' ml={6} borderColor='black'type="text" onChange={username}></Input>
+                  <Input h='4vh' ml={6} color ="black" borderColor='black'type="text" onChange={username}></Input>
               </Flex>
               <Flex>
                   <Text color='black' mt={1}>Password</Text>
-                  <Input h='4vh'  borderColor='black' ml={7} type="text" onChange={password}></Input>
+                  <Input h='4vh'  color="black" borderColor='black' ml={7} type="text" onChange={password}></Input>
               </Flex>
               </Stack>  
              </ModalBody>
@@ -91,8 +91,14 @@ function SignUp() {
                <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
                  Cancel
                </Button>
-               <SetBudget>
-               Next</SetBudget>  
+               <Button onClick ={res => {
+                 axios.post("http://localhost:4000/user/signup", {"username": username, "password": pass})
+                 .then(res => console.log(res))
+                 .catch(error => console.log(error))
+               }
+               }
+                 background="none"><SetBudget>
+             </SetBudget></Button> 
              </ModalFooter>
            </ModalContent>
          </Modal>

@@ -130,7 +130,7 @@ function SetBudget() {
 
     <ChakraProvider theme={theme}>
    
-         <Button  background="#E8E0D9" borderRadius="20" color="#9F7E69" fontSize="25px" height="5vh" onClick={onOpen}>Next</Button>
+         <Button  background="#E8E0D9"  borderRadius="20" color="#9F7E69" fontSize="25px" height="5vh" onClick={onOpen}>Next</Button>
    
          <Modal isOpen={isOpen} onClose={onClose}>
            <ModalOverlay />

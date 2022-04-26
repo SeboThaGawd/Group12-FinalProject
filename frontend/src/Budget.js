@@ -31,13 +31,16 @@ const Budget = (category, total, cap, under) => {
     let remainder = ""
     let firstPercent = 50
     let secondPercent = 50
+    let color = ""
 
     if (category.under) {
             remainder = "#D7FCD4"
             firstPercent = category.total/category.cap * 100
+            color = "#07E8BD "
     } else {
             remainder = "#9F7E69"
             firstPercent = category.cap/category.total * 100
+            color = "#fa6666"
     }
     secondPercent = (100 - firstPercent) + '%'
     firstPercent = (firstPercent) + '%'
@@ -61,7 +64,7 @@ const Budget = (category, total, cap, under) => {
                     <Flex color='w' w='100%' h='100%'>
                         <Center borderLeftRadius="10" w={first} bg='#A7E8BD'/>
                         <Center borderRightRadius="10" w={second} bg={remain}/>
-                        <Text pl={5} pt={1}>{tot}</Text>
+                        <Text color={color} fontWeight="bold" pl={5} pt={1}>{tot}</Text>
                     </Flex>
                 </GridItem>
             </Grid>
