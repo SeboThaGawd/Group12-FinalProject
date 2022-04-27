@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Menu,
   ChakraProvider,
   theme,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -38,14 +30,15 @@ import {
 import axios from 'axios';
 import { animate } from 'framer-motion';
 import Dashboard from './Dashboard';
-import { NavLink, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
 
 
 function Login() {
 
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
-  const [valid, setValid] = useState(true)
+  const [valid, setValid] = useState(false)
+  let end = ""
 
   function username(val) {
     setUser(val.target.value)
@@ -55,8 +48,10 @@ function Login() {
     setPass(val.target.value)
   }
 
-  function isVal(val) {
+  function changeVal() {
+    console.log(valid)
     setValid(true)
+    console.log(valid)
   }
 
 
@@ -65,19 +60,12 @@ function Login() {
   const toke = null
 
   function close(to) {
-    toke = to
     onClose()
   }
 
   function errr() {
     console.log("There was an error")
-   // onClose()
-  }
-
-  function newPage() {
-    return (
-      <Button></Button>
-    )
+    onClose()
   }
 
 
@@ -110,24 +98,27 @@ function Login() {
                <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
                  Cancel
                </Button>
+          
                <Button background='#CDE0D0' onClick={
                  () => {
                       const url = "http://localhost:4000/user/login"
                       if (user != "" && pass != "") {
                         axios.post(url, {"username":user, "password": pass})
                         .then(response => {
+                          console.log("ONE")
                           localStorage.setItem('token', JSON.stringify(response.data.token));
-                          (valid? <Dashboard/> : <Dashboard/>)
+                          changeVal();
+                          setValid(true)
                           localStorage.setItem('token', JSON.stringify(response.token));
-                          newPage()
                         }).catch(error => {console.log(error)})
+                        console.log("TWO")
+                        (valid? console.log("VALID"): console.log("INVALID"));
                       }
                   }
-               }>Login!</Button>  
+               }><NavLink to={end} onClick={console.log("END", end)}>Login!</NavLink></Button>
              </ModalFooter>
            </ModalContent>
          </Modal>
-   
          </ChakraProvider>
    
      );

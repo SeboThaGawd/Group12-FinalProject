@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -34,20 +34,16 @@ function Dashboard() {
     let otherBal = 0
     let today = new Date()
 
-    let state = {
-        purchases: [],
-        budgets: []
-    }
+    const [purchases, setPurchases] = useState([])
 
     componentDidMount()
 
     async function componentDidMount() {
-        console.log(localStorage.getItem('token'))
-        axios.get("http://localhost:4000/budget/get", { headers: {"auth" : localStorage.getItem('token')} })
+        console.log("TOKEN", localStorage.getItem('token'))
+        axios.get("http://localhost:4000/budget/get", { headers: {"token" : localStorage.getItem('token')} })
         .then(res => {
             console.log(res);
-            this.setState({purchases: res.body.data.Spent,
-                            budgets: res.body.data.Budget})
+            setPurchases(res.body.data)
         }).catch(error => {console.log(error)});
 
         //Different endpoints
@@ -95,12 +91,18 @@ function Dashboard() {
     <ChakraProvider theme={theme}>
         <Stack background="white">
         <Purchase/>
-        <Budget category="Grocery" total={50} cap={60} under={true}/>
-        <Budget category="Food" total={54} cap={20} under={false}/>
-        <Budget category="Grocery" total={50} cap={60} under={true}/>
-        <Budget category="Food" total={54} cap={50} under={false}/>
-        <Budget category="Grocery" total={50} cap={60} under={true}/>
-        <Budget category="Food" total={54} cap={50} under={false}/>
+        <Budget category={this.state.purchases[0].catID} total={this.state.purchases[0].spent} 
+        cap={this.state.purchases[0].budget} under={this.state.purchases[0].spent < this.state.purchases[0].budget}/>
+        <Budget category={this.state.purchases[1].catID} total={this.state.purchases[1].spent}
+         cap={this.state.purchases[1].budget} under={this.state.purchases[1].spent < this.state.purchases[1].budget}/>
+        <Budget category={this.state.purchases[2].catID} total={this.state.purchases[2].spent}
+         cap={this.state.purchases[2].budget} under={this.state.purchases[2].spent < this.state.purchases[2].budget}/>
+        <Budget category={this.state.purchases[3].catID} total={this.state.purchases[3].spent}
+         cap={this.state.purchases[3].budget} under={this.state.purchases[3].spent < this.state.purchases[3].budget}/>
+        <Budget category={this.state.purchases[4].catID} total={this.state.purchases[4].spent}
+        cap={this.state.purchases[4].budget} under={this.state.purchases[4].spent < this.state.purchases[4].budget}/>
+        <Budget category={this.state.purchases[5].catID} total={this.state.purchases[5].spent}
+         cap={this.state.purchases[5].budget} under={this.state.purchases[5].spent < this.state.purchases[5].budget}/>
 
             {/* <Budget category="Grocery" total={groceryBal} cap={this.budgets[0]} under={groceryBal <= this.budgets[0]}/>
             <Budget category="Food" total={foodBal} cap={this.budgets[1]} under={foodBal <= this.budgets[1]}/>

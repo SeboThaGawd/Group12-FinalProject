@@ -183,7 +183,7 @@ function SignUp() {
                  Cancel
                </Button>
                <Button onClick = {res => {
-                 axios.post("http://localhost:4000/user/signup", {"username": user, "password": pass, "budget":[groc, food, clothes, rec, other] })
+                 axios.post("http://localhost:4000/user/signup", {"username": user, "password": pass, "budgetAmounts":[groc, food, clothes, rec, other] })
                  .then(res => {console.log(res);
                               localStorage.setItem('token', JSON.stringify(res.data.token));
                               console.log(localStorage)

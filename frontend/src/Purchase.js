@@ -40,6 +40,10 @@ function Purchase() {
   const [amt, setAmt] = useState(0)
   const date = new Date();
 
+  function changeAmt(val) {
+    setAmt(val.target.value)
+  }
+
   return (
     <ChakraProvider theme={theme}>
       <Box background="#E8E0D9" borderfontSize="xl" borderRadius="20" h='10vh'>
@@ -53,10 +57,10 @@ function Purchase() {
                 <option value='option3'>Other</option>
             </Select>
             <Text ml={10} mr={10} onChange = {(res) => setAmt(res.target.value)}>Please input Amount</Text>
-            <Input type="text" color="black" background = '#FFFFF5' width="30vw"></Input>
+            <Input type="text" color="black" onChange={changeAmt} background = '#FFFFF5' width="30vw"></Input>
             <Button ml={10} color="black" background="#D7FCD4"lp={4} onClick={() => {
               if (option != "" && amt > 0) {
-                axios.post("http://localhost:4000/budget/add", {"Category": option, "Amount": amt})
+                axios.post("http://localhost:4000/budget/add", {"Amount": amt, "Category": option})
                 .then(res => (console.log(res)))
                 .catch(error => (console.log(error)))
             }}}>Add!</Button>
