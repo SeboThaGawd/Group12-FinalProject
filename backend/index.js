@@ -12,7 +12,7 @@ const app = express();
 app.use(cors())
 
 // PORT
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(bodyParser.json());
