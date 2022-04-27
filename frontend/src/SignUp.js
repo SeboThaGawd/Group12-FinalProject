@@ -38,6 +38,7 @@ import {
 import axios from 'axios';
 import { animate } from 'framer-motion';
 import SetBudget from './SetBudget';
+import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
 
 
 function SignUp() {

@@ -38,9 +38,11 @@ function Dashboard() {
 
     componentDidMount()
 
+    console.log("HEREEEEE")
+
     async function componentDidMount() {
         console.log("TOKEN", localStorage.getItem('token'))
-        axios.get("http://localhost:4000/budget/get", { headers: {"token" : localStorage.getItem('token')} })
+        axios.get("http://localhost:4000/budget/get")
         .then(res => {
             console.log(res);
             setPurchases(res.body.data)
@@ -88,6 +90,7 @@ function Dashboard() {
     }
 
   return (
+
     <ChakraProvider theme={theme}>
         <Stack background="white">
         <Purchase/>

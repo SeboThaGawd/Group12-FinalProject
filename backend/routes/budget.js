@@ -24,7 +24,7 @@ router.put('/add', auth, async (req, res) => {
     }
 });
 
-router.get('/get', auth, async (req, res) => {
+router.get('/get', async (req, res) => {
     try {
         const user = await USER.findById(req.user.id);
         res.json(user.categories);

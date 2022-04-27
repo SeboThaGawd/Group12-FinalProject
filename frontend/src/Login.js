@@ -30,7 +30,7 @@ import {
 import axios from 'axios';
 import { animate } from 'framer-motion';
 import Dashboard from './Dashboard';
-import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, useNavigate, NavLink, Route, Routes} from 'react-router-dom';
 
 
 function Login() {
@@ -39,6 +39,8 @@ function Login() {
   const [pass, setPass] = useState("")
   const [valid, setValid] = useState(false)
   let end = ""
+
+  let navigate = useNavigate();
 
   function username(val) {
     setUser(val.target.value)
@@ -102,20 +104,18 @@ function Login() {
                <Button background='#CDE0D0' onClick={
                  () => {
                       const url = "http://localhost:4000/user/login"
+                      setValid(false)
                       if (user != "" && pass != "") {
                         axios.post(url, {"username":user, "password": pass})
                         .then(response => {
-                          console.log("ONE")
                           localStorage.setItem('token', JSON.stringify(response.data.token));
-                          changeVal();
-                          setValid(true)
-                          localStorage.setItem('token', JSON.stringify(response.token));
-                        }).catch(error => {console.log(error)})
-                        console.log("TWO")
-                        (valid? console.log("VALID"): console.log("INVALID"));
+                          console.log("LOGIN TOKEN", localStorage)
+                          navigate('/profile')
+
+                        }).catch(error => {console.log(error)});
                       }
                   }
-               }><NavLink to={end} onClick={console.log("END", end)}>Login!</NavLink></Button>
+               }>Login!</Button>
              </ModalFooter>
            </ModalContent>
          </Modal>
