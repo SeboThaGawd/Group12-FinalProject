@@ -27,7 +27,6 @@ router.put('/add', auth, async (req, res) => {
 router.get('/get', auth, async (req, res) => {
     try {
         const user = await USER.findById(req.user.id);
-        console.log(user);
         res.json(user.categories);
     } catch(err) {
         res.json({ message: "Error in retrieving user data" });
