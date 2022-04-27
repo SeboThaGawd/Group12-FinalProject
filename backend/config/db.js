@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { modelName } = require('../models/UserSchema');
 
-const url = "mongodb+srv://FullStackDecal12:flowersandrainbows@cluster0.cwm0b.mongodb.net/test"; //Mongo DB Atlas
+const url = "mongodb+srv://FullStackDecal12:flowersandrainbows@cluster0.cwm0b.mongodb.net/Cluster0"; //Mongo DB Atlas
+
 mongoose.connect(url);
 
 const InitiateMongoServer = async () => {
