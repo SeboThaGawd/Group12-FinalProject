@@ -55,6 +55,11 @@ function Login() {
     setPass(val.target.value)
   }
 
+  function isVal(val) {
+    setValid(true)
+  }
+
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toke = null
@@ -70,7 +75,6 @@ function Login() {
   }
 
   function newPage() {
-    console.log("HEREEEE")
     return (
       <Button></Button>
     )
@@ -112,10 +116,12 @@ function Login() {
                       if (user != "" && pass != "") {
                         axios.post(url, {"username":user, "password": pass})
                         .then(response => {
+                          localStorage.setItem('token', JSON.stringify(response.data.token));
                           setValid(true)
+                          (valid? <Dashboard/> : <Dashboard/>)
                           localStorage.setItem('token', JSON.stringify(response.token));
                           newPage()
-                        }).catch(error => {errr()})
+                        }).catch(error => {console.log(error)})
                       }
                   }
                }>Login!</Button>  

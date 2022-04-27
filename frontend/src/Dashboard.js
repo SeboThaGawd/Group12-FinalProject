@@ -42,8 +42,8 @@ function Dashboard() {
     componentDidMount()
 
     async function componentDidMount() {
-
-        axios.get("http://localhost:4000/budget/get", )
+        console.log(localStorage.getItem('token'))
+        axios.get("http://localhost:4000/budget/get", { headers: {"auth" : localStorage.getItem('token')} })
         .then(res => {
             console.log(res);
             this.setState({purchases: res.body.data.Spent,
