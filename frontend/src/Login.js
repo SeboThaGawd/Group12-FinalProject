@@ -45,7 +45,7 @@ function Login() {
 
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
-  const [valid, setValid] = useState(false)
+  const [valid, setValid] = useState(true)
 
   function username(val) {
     setUser(val.target.value)
@@ -117,7 +117,6 @@ function Login() {
                         axios.post(url, {"username":user, "password": pass})
                         .then(response => {
                           localStorage.setItem('token', JSON.stringify(response.data.token));
-                          setValid(true)
                           (valid? <Dashboard/> : <Dashboard/>)
                           localStorage.setItem('token', JSON.stringify(response.token));
                           newPage()
