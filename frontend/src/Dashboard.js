@@ -38,11 +38,10 @@ function Dashboard() {
 
     componentDidMount()
 
-    console.log("HEREEEEE")
 
     async function componentDidMount() {
         console.log("TOKEN", localStorage.getItem('token'))
-        axios.get("http://localhost:4000/budget/get")
+        axios.get("http://localhost:4000/budget/get", {headers : {token: localStorage.getItem('token')}})
         .then(res => {
             console.log(res);
             setPurchases(res.body.data)
