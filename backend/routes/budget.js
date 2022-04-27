@@ -10,8 +10,6 @@ router.put('/add', auth, async (req, res) => {
         const amount = req.body.amount;
         const inputCategory = req.body.category;
         const catArray = user.categories;
-        console.log(inputCategory);
-        console.log(catArray);
         for (let i = 0; i < catArray.length; i++) {
             if (catArray[i].catID == inputCategory) {
                 catArray[i].spent =  catArray[i].spent + amount;

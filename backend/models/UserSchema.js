@@ -9,8 +9,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //array of category objects
-    categories: [{              //"fixed" field removed
+    categories: [{              
         "catID": String,
         "spent": Number,
         "budget": Number
