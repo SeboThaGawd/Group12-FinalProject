@@ -56,7 +56,7 @@ function Purchase() {
             <Input type="text" color="black" background = '#FFFFF5' width="30vw"></Input>
             <Button ml={10} color="black" background="#D7FCD4"lp={4} onClick={() => {
               if (option != "" && amt > 0) {
-                axios.post("http://localhost:4000/budget/add", {"Category": option, "Amount": amt, "Date": date})
+                axios.post("http://localhost:4000/budget/add", {"Category": option, "Amount": amt})
                 .then(res => (console.log(res)))
                 .catch(error => (console.log(error)))
             }}}>Add!</Button>

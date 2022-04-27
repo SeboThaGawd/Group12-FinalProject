@@ -42,20 +42,21 @@ function Dashboard() {
     componentDidMount()
 
     async function componentDidMount() {
-
-        axios.get("http://localhost:4000/user")
+        console.log(localStorage.getItem('token'))
+        axios.get("http://localhost:4000/budget/get", { headers: {"auth" : localStorage.getItem('token')} })
         .then(res => {
             console.log(res);
-            this.setState({purchases: res.body.data})
+            this.setState({purchases: res.body.data.Spent,
+                            budgets: res.body.data.Budget})
         }).catch(error => {console.log(error)});
 
         //Different endpoints
-        axios.get("http://localhost:4000/user")
-        .then(res => {
-            console.log(res);
-            this.setState({budgets: res.body.data})
-        }).catch(error => {console.log(error)});
-        filter()
+        // axios.get("http://localhost:4000/user/mes")
+        // .then(res => {
+        //     console.log(res);
+        //     this.setState({budgets: res.body.data})
+        // }).catch(error => {console.log(error)});
+        // filter()
     }
 
     function dateDiffInDays(one, two) {
@@ -86,16 +87,16 @@ function Dashboard() {
                 if (this.purchases[i].category == "other") {
                     otherBal += this.purchases[i].price
                 }
-            }
+            } 
         }
     }
 
   return (
     <ChakraProvider theme={theme}>
-        <Stack>
+        <Stack background="white">
         <Purchase/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>
-        <Budget category="Food" total={54} cap={50} under={false}/>
+        <Budget category="Food" total={54} cap={20} under={false}/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>
         <Budget category="Food" total={54} cap={50} under={false}/>
         <Budget category="Grocery" total={50} cap={60} under={true}/>

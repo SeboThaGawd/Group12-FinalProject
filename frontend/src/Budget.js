@@ -44,14 +44,11 @@ const Budget = (category, total, cap, under) => {
     }
     secondPercent = (100 - firstPercent) + '%'
     firstPercent = (firstPercent) + '%'
-    console.log(firstPercent, secondPercent)
 
     const first = firstPercent
     const second = secondPercent
     const remain = remainder
     const tot = category.total
-
-    console.log(first, second, remain)
 
 
   return (
