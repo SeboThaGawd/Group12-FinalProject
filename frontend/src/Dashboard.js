@@ -44,7 +44,7 @@ function Dashboard() {
         axios.get("http://localhost:4000/budget/get", {headers : {token: localStorage.getItem('token')}})
         .then(res => {
             console.log(res);
-            setPurchases(res.body.data)
+            setPurchases(res.data)
         }).catch(error => {console.log(error)});
 
         //Different endpoints
