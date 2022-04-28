@@ -19,17 +19,11 @@ import {
   Grid,
   Stack,
   Text,
-  chakra,
-  Box,
-  Switch,
-  VStack,
   IconButton,
   useDisclosure,
   HStack
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { animate } from 'framer-motion';
-import Dashboard from './Dashboard';
 import {BrowserRouter as Router, Navigate, useNavigate, NavLink, Route, Routes} from 'react-router-dom';
 
 
@@ -87,11 +81,11 @@ function Login() {
               <Stack>
                 <Flex justifyContent="space-between">
                   <Text>Username</Text>
-                  <Input h='4vh' borderColor="black" ml={6} border="solid" type="text" onChange={username}></Input>
+                  <Input h='4vh' borderColor="black" ml={6} border="solid" type="username" onChange={username}></Input>
               </Flex>
               <Flex>
                   <Text mt={1}>Password</Text>
-                  <Input h='4vh' ml={7} borderColor="black" type="text" onChange={password}></Input>
+                  <Input h='4vh' ml={7} borderColor="black" type="password" onChange={password}></Input>
               </Flex>
               </Stack>  
              </ModalBody>

@@ -12,7 +12,6 @@ import {
   IconButton,
   Button,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { IconBase } from 'react-icons';
 import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
 import Mainpage from './Mainpage';

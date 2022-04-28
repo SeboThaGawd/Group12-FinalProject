@@ -5,24 +5,11 @@ import {
   Text,
   Link,
     Flex,
-  VStack,
   Center,
-  Code,
-  Button,
-  Spacer,  
-  Stack,
   Grid,
   GridItem,
   theme,
 } from '@chakra-ui/react';
-import Navbar from './Navbar';
-import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
-import Mainpage from './Mainpage';
-import Loginpage from './LoginPage';
-import SignUp from './SignUp';
-import Login from './Login';
-import Profile from './Profile';
-import Purchase from './Purchase';
 
 const Budget = (category, total, cap, under) => {
 

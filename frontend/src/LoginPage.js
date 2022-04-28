@@ -12,7 +12,6 @@ import {
   theme,
   Button,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import Navbar from './Navbar';
 import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
