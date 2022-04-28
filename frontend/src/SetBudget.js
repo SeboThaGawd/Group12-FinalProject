@@ -38,7 +38,6 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { animate } from 'framer-motion';
-import './SetBudget.css';
 
 
 function SetBudget() {

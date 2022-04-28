@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     username: {
@@ -9,8 +9,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //array of category objects
-    categories: [{              //"budget" field removed
+    categories: [{              
         "catID": String,
         "spent": Number,
         "budget": Number
@@ -23,4 +22,4 @@ const userSchema = mongoose.Schema({
 
 
 
-module.exports = mongoose.model('userScehma', userSchema)
+module.exports = mongoose.model('users', userSchema);

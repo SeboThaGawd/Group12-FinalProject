@@ -38,12 +38,22 @@ import {
 import axios from 'axios';
 import { animate } from 'framer-motion';
 import SetBudget from './SetBudget';
+import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
 
 
 function SignUp() {
 
+
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
+
+  const [groc, setGroc] = useState(0)
+  const [food, setFood] = useState(0)
+  const [clothes, setClothes] = useState(0)
+  const [rec, setRec] = useState(0)
+  const [other, setOther] = useState(0)
+  const [sum, setSum] = useState(0)
+
 
   function username(val) {
     setUser(val.target.value)
@@ -61,6 +71,67 @@ function SignUp() {
     toke = to
     onClose()
   }
+
+
+  function grocVal(val) {
+    console.log(val.target.value)
+    if (val == null) {
+        val.target.value = 0;
+    }
+    setGroc(val.target.value)
+    sumVal()
+  }
+
+  function foodVal(val) {
+    console.log(val.target.value)
+    if (val == null) {
+        val.target.value = 0;
+    }
+    setFood(val.target.value)
+    sumVal()
+  }
+
+  function clothesVal(val) {
+    console.log(val.target.value)
+    if (val == null) {
+        val.target.value = 0;
+    }
+    setClothes(val.target.value)
+    sumVal()
+  }
+
+  function recVal(val) {
+    console.log(val.target.value)
+    if (val == null) {
+        val.target.value = 0;
+    }
+    setRec(val.target.value)
+    sumVal()
+  }
+
+  function otherVal(val) {
+    console.log(val.target.value)
+    if (val == null) {
+        val.target.value = 0;
+    }
+    setOther(val.target.value)
+    sumVal()
+  }
+
+  function sumVal() {
+      setSum(parseInt(groc) + parseInt(food) +  parseInt(clothes) + parseInt(rec) + parseInt(other))
+  }
+
+
+  function close(to) {
+    toke = to
+    onClose()
+  }
+
+  function errr() {
+    console.log("There was an error")
+  }
+
 
 
   return (
@@ -84,6 +155,27 @@ function SignUp() {
                   <Text color='black' mt={1}>Password</Text>
                   <Input h='4vh'  color="black" borderColor='black' ml={7} type="text" onChange={password}></Input>
               </Flex>
+              <Flex pt={6} width = "18vw" justifyContent="space-between">
+                <Text color='black'>Groceries</Text>
+                <Input ml={7} h='4vh' borderColor='black' type="text" onChange={grocVal}></Input>
+              </Flex>
+              <Flex width = "18vw" justifyContent="space-between">
+                <Text color='black'>Food/Bev</Text>
+                <Input ml={7} h='4vh' borderColor='black' type="text" onChange={foodVal}></Input>
+              </Flex>
+              <Flex width = "18vw" justifyContent="space-between">
+                <Text color='black'>Clothes</Text>
+                <Input ml={10} h='4vh' borderColor='black' type="text" onChange={clothesVal}></Input>
+              </Flex>
+              <Flex width = "18vw" justifyContent="space-between">
+                <Text color='black'>Recreation</Text>
+                <Input ml={6} h='4vh' borderColor='black' type="text" onChange={recVal}></Input>
+              </Flex>
+              <Flex width = "18vw" justifyContent="space-between">
+                <Text color='black' >Other</Text>
+                <Input ml={14} h='4vh'  borderColor='black' type="text" onChange={otherVal}></Input>
+              </Flex>
+                  <Text color="black">{sum}</Text>
               </Stack>  
              </ModalBody>
    
@@ -91,14 +183,16 @@ function SignUp() {
                <Button color='#456765' colorScheme='ghost' mr={3} onClick={onClose}>
                  Cancel
                </Button>
-               <Button onClick ={res => {
-                 axios.post("http://localhost:4000/user/signup", {"username": username, "password": pass})
-                 .then(res => console.log(res))
+               <Button onClick = {res => {
+                 axios.post("http://localhost:4000/user/signup", {"username": user, "password": pass, "budgetAmounts":[groc, food, clothes, rec, other] })
+                 .then(res => {console.log(res);
+                              localStorage.setItem('token', (res.data.token));
+                              console.log(localStorage)
+                 })
                  .catch(error => console.log(error))
                }
                }
-                 background="none"><SetBudget>
-             </SetBudget></Button> 
+                 background="#E8E0D9" color="black">Sign Up!</Button> 
              </ModalFooter>
            </ModalContent>
          </Modal>
@@ -107,7 +201,7 @@ function SignUp() {
    
      );
    }
-
+   
 export default SignUp;
 
 

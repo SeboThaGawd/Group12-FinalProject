@@ -1,6 +1,6 @@
-const express = require('express')
-const router = express.Router()
-const auth = require('./../middleware/auth')
+const express = require('express');
+const router = express.Router();
+const auth = require('./../middleware/auth');
 const USER = require('../models/UserSchema');
 const { modelName } = require('../models/UserSchema');
 
@@ -11,8 +11,10 @@ router.put('/add', auth, async (req, res) => {
         const inputCategory = req.body.category;
         const catArray = user.categories;
         for (let i = 0; i < catArray.length; i++) {
-            if (catArray[i].name == inputCategory) {
+            if (catArray[i].catID == inputCategory) {
                 catArray[i].spent =  catArray[i].spent + amount;
+                console.log(catArray);
+                break;
             }
         }
         await user.save();
@@ -31,6 +33,7 @@ router.get('/get', auth, async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 router.delete('/delete', auth, async (req, res) => {
     try {
         const item = req.body.item;
@@ -61,6 +64,27 @@ router.delete('/delete', auth, async (req, res) => {
 })
 
 
+=======
+router.put('/edit', auth, async (req, res) => {
+    try {
+        const user = await USER.findById(req.user.id);
+        const newBudget = req.body.newBudget;
+        const inputCategory = req.body.category;
+        const catArray = user.categories;
+        for (let i = 0; i < catArray.length; i++) {
+            if (catArray[i].catID == inputCategory) {
+                catArray[i].budget =  newBudget;
+                console.log(catArray);
+                break;
+            }
+        }
+        await user.save();
+        res.json(user);
+    } catch(err) {
+        res.json({ message: "Error in editing budget" });
+    }
+});
+>>>>>>> refs/remotes/origin/main
 
 
 // //update
