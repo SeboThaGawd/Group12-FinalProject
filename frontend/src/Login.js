@@ -25,6 +25,7 @@ function Login() {
   const [user, setUser] = useState("")
   const [pass, setPass] = useState("")
   const [valid, setValid] = useState(false)
+  const [fail, setFail] = useState(false)
   let end = ""
 
   let navigate = useNavigate();
@@ -45,9 +46,8 @@ function Login() {
     onClose()
   }
 
-  function errr() {
-    console.log("There was an error")
-    onClose()
+  function didFail() {
+    setFail("*Username or Password incorrect")
   }
 
 
@@ -74,6 +74,7 @@ function Login() {
                   <Input h='4vh' ml={7} borderColor="black" type="password" onChange={password}></Input>
               </Flex>
               </Stack>  
+              <Text pt={8} color="tomato">{fail}</Text>
              </ModalBody>
    
              <ModalFooter>
@@ -92,7 +93,7 @@ function Login() {
                           console.log("LOGIN TOKEN", localStorage)
                           navigate('/profile')
 
-                        }).catch(error => {console.log(error)});
+                        }).catch(error => didFail());
                       }
                   }
                }>Login!</Button>
