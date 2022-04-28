@@ -10,18 +10,11 @@ import {
   Input,
   ModalBody,
   ModalCloseButton,
-  MenuCommand,
-  MenuDivider,
   Button,
   Flex,
-  Link,
-  Code,
-  Grid,
   Stack,
   Text,
-  IconButton,
   useDisclosure,
-  HStack
 } from '@chakra-ui/react';
 import axios from 'axios';
 import {BrowserRouter as Router, Navigate, useNavigate, NavLink, Route, Routes} from 'react-router-dom';
@@ -43,13 +36,6 @@ function Login() {
   function password(val) {
     setPass(val.target.value)
   }
-
-  function changeVal() {
-    console.log(valid)
-    setValid(true)
-    console.log(valid)
-  }
-
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 

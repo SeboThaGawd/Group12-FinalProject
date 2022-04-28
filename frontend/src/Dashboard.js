@@ -12,6 +12,8 @@ function Dashboard() {
 
     const [purchases, setPurchases] = useState([]);
 
+    //this.props.onAdd();
+
     useEffect(() => { 
         async function componentDidMount() {
     
@@ -24,13 +26,13 @@ function Dashboard() {
             }).catch(error => {console.log(error)});
         }
         componentDidMount()
-    }, []);
+    });
 
   return (
 
     <ChakraProvider theme={theme}>
-        <Stack background="#EEFCED">
-        <Purchase/>
+        <Stack onAdd  background="#EEFCED">
+        <Purchase></Purchase>
         {
             purchases.map(p =>  <Budget name={p.catID} total={p.spent} cap={p.budget} under={p.spent < p.budget}/> )
         }

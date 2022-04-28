@@ -7,12 +7,12 @@ const { modelName } = require('../models/UserSchema');
 router.put('/add', auth, async (req, res) => {
     try {
         const user = await USER.findById(req.user.id);
-        const amount = req.body.amount;
-        const inputCategory = req.body.category;
+        const amount = req.body.Amount;
+        const inputCategory = req.body.Category;
         const catArray = user.categories;
         for (let i = 0; i < catArray.length; i++) {
             if (catArray[i].catID == inputCategory) {
-                catArray[i].spent =  catArray[i].spent + amount;
+                catArray[i].spent =  parseInt(catArray[i].spent) + parseInt(amount);
                 console.log(catArray);
                 break;
             }
