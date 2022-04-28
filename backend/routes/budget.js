@@ -7,8 +7,8 @@ const { modelName } = require('../models/UserSchema');
 router.put('/add', auth, async (req, res) => {
     try {
         const user = await USER.findById(req.user.id);
-        const amount = req.body.Amount;
-        const inputCategory = req.body.Category;
+        const amount = req.body.amount;
+        const inputCategory = req.body.category;
         const catArray = user.categories;
         for (let i = 0; i < catArray.length; i++) {
             if (catArray[i].catID == inputCategory) {
@@ -33,7 +33,33 @@ router.get('/get', auth, async (req, res) => {
     }
 });
 
-
+router.delete('/delete', auth, async (req, res) => {
+    try {
+        const user = await USER.findById(req.user.id);
+        const catToRem = req.body.rem;
+        const currentCat = user.categories;
+        for (var i = 0; i < currentCat.length; i++) {
+            if (currentCat[i].catID == catToRem) {
+                currentCat.splice(i,1)
+                break
+            }
+        }
+        const query = {_id: req.user.id};
+        User.findOneAndUpdate(query, {categories: currentCat}, {new: true}, function(err, User) {
+            if (err) {
+                console.log(err);
+                res.json({msg: "cannot delete from categories list"})
+            } else {
+                res.json({
+                    status: "deleted successful",
+                    categories: User.categories
+                })
+            }
+        })
+    } catch(err) {
+        res.json({ message: "Cannot Find" })
+    }
+})
 
 
 // //update
