@@ -35,7 +35,6 @@ router.get('/get', auth, async (req, res) => {
 
 router.delete('/delete', auth, async (req, res) => {
     try {
-        const item = req.body.item;
         const user = await USER.findById(req.user.id);
         const catToRem = req.body.rem;
         const currentCat = user.categories;
