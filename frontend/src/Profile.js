@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Menu,
   ChakraProvider,
   theme,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -17,17 +9,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  MenuCommand,
-  MenuDivider,
   Button,
-  Flex,
-  Text,
-  chakra,
-  Box,
-  Switch,
-  IconButton,
   useDisclosure,
-  HStack
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { animate } from 'framer-motion';

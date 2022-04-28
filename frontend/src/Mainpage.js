@@ -3,15 +3,10 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Link,
-    Flex,
-  VStack,
-  Code,
-  Button,
+  Flex,
   Spacer,  
   Stack,
   Grid,
-  theme,
 } from '@chakra-ui/react';
 import SignUp from './SignUp';
 import Login from './Login';
@@ -23,7 +18,6 @@ function Mainpage() {
     <ChakraProvider>
       <Box background="#218F80" fontSize="xl">
         <Grid minH="100vh" p={3}>
-
           <Flex width="85vw">
           <Stack height="60vh" mt={75}>
           <Spacer/>
@@ -38,7 +32,6 @@ function Mainpage() {
           <Login>Login</Login>
           <SignUp >SignUp</SignUp>
           </Stack>
-          <Spacer></Spacer>
           <img src="budget.png" alt="our bugeting app" position="absolute" width="50%"></img>
           </Flex>
         </Grid>

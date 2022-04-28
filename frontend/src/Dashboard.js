@@ -1,21 +1,9 @@
 import {React, useEffect, useState} from 'react';
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  Center,
-    Flex,
-  VStack,
-  Code,
-  Button,
-  Spacer,  
   Stack,
-  Grid,
   theme,
 } from '@chakra-ui/react';
-import Navbar from './Navbar';
-import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
 import Purchase from './Purchase';
 import axios from 'axios';
 import Budget from './Budget';
@@ -41,10 +29,10 @@ function Dashboard() {
   return (
 
     <ChakraProvider theme={theme}>
-        <Stack background="white">
+        <Stack background="#EEFCED">
         <Purchase/>
         {
-            purchases.map(p =>  <Budget category={p.catID} total={p.spent} cap={p.budget} under={p.spent < p.budget}/> )
+            purchases.map(p =>  <Budget name={p.catID} total={p.spent} cap={p.budget} under={p.spent < p.budget}/> )
         }
         </Stack>
     </ChakraProvider>

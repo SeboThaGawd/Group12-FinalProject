@@ -3,16 +3,14 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Link,
-    Flex,
+  Flex,
   Center,
   Grid,
   GridItem,
   theme,
 } from '@chakra-ui/react';
 
-const Budget = (category, total, cap, under) => {
-
+const Budget = (category, name, total, cap, under) => {
 
     let len = 100
     let remainder = ""
@@ -36,14 +34,14 @@ const Budget = (category, total, cap, under) => {
     const second = secondPercent
     const remain = remainder
     const tot = category.total
-
+    const cat = category.name
 
   return (
       
     <ChakraProvider theme={theme}>
-        <Box h='130px' bg='#E8E0D9' borderRadius="20">
+        <Box h='140px' bg='#E8E0D9' borderRadius="20">
             <Grid gap={6} br="25%" w='80%'>
-                <Text pl={7} pt={5}>Category</Text>
+                <Text color = "#9F7E69" fontWeight="bold" pl={7} pt={5}>{cat}</Text>
                 <GridItem pl={12} w='100%' h='10' bg='none'>
                     <Flex color='w' w='100%' h='100%'>
                         <Center borderLeftRadius="10" w={first} bg='#A7E8BD'/>

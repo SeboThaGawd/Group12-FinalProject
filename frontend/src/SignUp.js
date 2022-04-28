@@ -3,13 +3,6 @@ import {
   Menu,
   ChakraProvider,
   theme,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -18,28 +11,14 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  MenuCommand,
-  MenuDivider,
   Button,
   Flex,
-  Link,
-  Code,
-  Grid,
   Stack,
   Text,
-  chakra,
-  Box,
-  Switch,
-  VStack,
-  IconButton,
   useDisclosure,
   HStack
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { animate } from 'framer-motion';
-import SetBudget from './SetBudget';
-import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom';
-
 
 function SignUp() {
 
@@ -53,6 +32,7 @@ function SignUp() {
   const [rec, setRec] = useState(0)
   const [other, setOther] = useState(0)
   const [sum, setSum] = useState(0)
+  const [taken, setTaken] = useState("")
 
 
   function username(val) {
@@ -79,7 +59,7 @@ function SignUp() {
         val.target.value = 0;
     }
     setGroc(val.target.value)
-    sumVal()
+
   }
 
   function foodVal(val) {
@@ -88,7 +68,7 @@ function SignUp() {
         val.target.value = 0;
     }
     setFood(val.target.value)
-    sumVal()
+
   }
 
   function clothesVal(val) {
@@ -97,7 +77,7 @@ function SignUp() {
         val.target.value = 0;
     }
     setClothes(val.target.value)
-    sumVal()
+
   }
 
   function recVal(val) {
@@ -106,7 +86,7 @@ function SignUp() {
         val.target.value = 0;
     }
     setRec(val.target.value)
-    sumVal()
+ 
   }
 
   function otherVal(val) {
@@ -115,23 +95,12 @@ function SignUp() {
         val.target.value = 0;
     }
     setOther(val.target.value)
-    sumVal()
+
   }
 
-  function sumVal() {
-      setSum(parseInt(groc) + parseInt(food) +  parseInt(clothes) + parseInt(rec) + parseInt(other))
+  function updateTaken() {
+    setTaken("**Username Taken")
   }
-
-
-  function close(to) {
-    toke = to
-    onClose()
-  }
-
-  function errr() {
-    console.log("There was an error")
-  }
-
 
 
   return (
@@ -142,7 +111,7 @@ function SignUp() {
    
          <Modal isOpen={isOpen} onClose={onClose}>
            <ModalOverlay />
-           <ModalContent background='#ffffff'>
+           <ModalContent background='#E8E0D9'>
              <ModalHeader color='black'>Welcome!</ModalHeader>
              <ModalCloseButton />
              <ModalBody>
@@ -152,8 +121,8 @@ function SignUp() {
                   <Input h='4vh' ml={6} color ="black" borderColor='black'type="text" onChange={username}></Input>
               </Flex>
               <Flex>
-                  <Text color='black' mt={1}>Password</Text>
-                  <Input h='4vh'  color="black" borderColor='black' ml={7} type="text" onChange={password}></Input>
+                  <Text color='black'  mt={1}>Password</Text>
+                  <Input h='4vh'  color="black" type="text" borderColor='black' ml={7} onChange={password}></Input>
               </Flex>
               <Flex pt={6} width = "18vw" justifyContent="space-between">
                 <Text color='black'>Groceries</Text>
@@ -175,7 +144,7 @@ function SignUp() {
                 <Text color='black' >Other</Text>
                 <Input ml={14} h='4vh'  borderColor='black' type="text" onChange={otherVal}></Input>
               </Flex>
-                  <Text color="black">{sum}</Text>
+              <Text pt={8} color="tomato">{taken}</Text>
               </Stack>  
              </ModalBody>
    
@@ -189,7 +158,7 @@ function SignUp() {
                               localStorage.setItem('token', (res.data.token));
                               console.log(localStorage)
                  })
-                 .catch(error => console.log(error))
+                 .catch(error => updateTaken())
                }
                }
                  background="#E8E0D9" color="black">Sign Up!</Button> 

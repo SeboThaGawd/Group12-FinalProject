@@ -7,8 +7,8 @@ const { modelName } = require('../models/UserSchema');
 router.put('/add', auth, async (req, res) => {
     try {
         const user = await USER.findById(req.user.id);
-        const amount = req.body.amount;
-        const inputCategory = req.body.category;
+        const amount = req.body.Amount;
+        const inputCategory = req.body.Category;
         const catArray = user.categories;
         for (let i = 0; i < catArray.length; i++) {
             if (catArray[i].catID == inputCategory) {
@@ -33,25 +33,7 @@ router.get('/get', auth, async (req, res) => {
     }
 });
 
-router.put('/edit', auth, async (req, res) => {
-    try {
-        const user = await USER.findById(req.user.id);
-        const newBudget = req.body.newBudget;
-        const inputCategory = req.body.category;
-        const catArray = user.categories;
-        for (let i = 0; i < catArray.length; i++) {
-            if (catArray[i].catID == inputCategory) {
-                catArray[i].budget =  newBudget;
-                console.log(catArray);
-                break;
-            }
-        }
-        await user.save();
-        res.json(user);
-    } catch(err) {
-        res.json({ message: "Error in editing budget" });
-    }
-});
+
 
 
 // //update
