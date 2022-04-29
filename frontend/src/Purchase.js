@@ -38,7 +38,7 @@ function Purchase() {
                 <option value='rec'>Recreational</option>
                 <option value='other'>other</option>
             </Select>
-            <Text ml={10} mr={10} onChange = {(res) => setAmt(res.target.value)}>Please input Amount</Text>
+            <Text ml={10} mr={10} mt={2} color = "#9F7E69" fontWeight="bold" onChange = {(res) => setAmt(res.target.value)}>Please input Amount</Text>
             <Input type="text" color="black" onChange={changeAmt} background = '#FFFFF5' width="30vw"></Input>
             <Button ml={10} color="black" background="#D7FCD4"lp={4} onClick={() => {
               if (option != "" && amt > 0) {
@@ -47,6 +47,7 @@ function Purchase() {
                 .then(res => (console.log(res)))
                 .catch(error => (console.log(error)))
             }}}>Add!</Button>
+            <Text color = "#9F7E69" fontWeight="bold"ml = {20} mt={2}>Budgets</Text>
         </Flex>
       </Box>
     </ChakraProvider>

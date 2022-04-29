@@ -32,7 +32,7 @@ function Dashboard() {
 
     <ChakraProvider theme={theme}>
         <Stack onAdd  background="#EEFCED">
-        <Purchase></Purchase>
+        <Purchase/>
         {
             purchases.map(p =>  <Budget name={p.catID} total={p.spent} cap={p.budget} under={p.spent < p.budget}/> )
         }
